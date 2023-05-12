@@ -16,6 +16,11 @@ import {
 import type { bucket } from '../player/bucket/bucket';
 const { ccclass, property } = _decorator;
 
+enum GameState {
+    STOP = 0,
+    START = 1,
+}
+
 @ccclass('sceneController')
 export class sceneController extends Component {
 
@@ -44,15 +49,17 @@ export class sceneController extends Component {
     @property
     randomSize: number = 30;
 
-    start() {
+    current: GameState = GameState.STOP;
 
+    start() {
+        this.current = GameState.START;
     }
 
     update(deltaTime: number) {
         const bucketFull = this.bucketList && this.bucketList.children.every((node) => {
             const comp = node.getComponent('bucket') as bucket;
             if (comp) {
-                return comp.progress === 100;
+                return comp.progress >= 100;
             }
         });
         if (bucketFull) {
@@ -80,7 +87,11 @@ export class sceneController extends Component {
      * 当所有桶收集满了之后触发的回调
      */
     _onBucketFull() {
-
+        if (this.current !== GameState.START) {
+            return;
+        }
+        this.current = GameState.STOP;
+        debugger;
     }
 }
 
