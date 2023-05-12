@@ -24,6 +24,7 @@ enum PointDirectionEnum {
     RIGHT = 1,
     DOWN = 2,
     LEFT = 3,
+    AUTO = 4,
 };
 ccenum(PointDirectionEnum);
 
@@ -33,7 +34,9 @@ export class point extends Component {
     /**
      * 控制点方向
      */
-    @property({ type: PointDirectionEnum })
+    @property({
+        type: PointDirectionEnum,
+    })
     get direction() : PointDirectionEnum {
         return this._direction;
     }
@@ -41,7 +44,7 @@ export class point extends Component {
         this._direction = val;
         this.node.setRotationFromEuler(0, 0, this._direction * 90);
     }
-    _direction: PointDirectionEnum = PointDirectionEnum.UP;
+    _direction: PointDirectionEnum = PointDirectionEnum.AUTO;
 
     /**
      * 控制点大小
@@ -59,7 +62,7 @@ export class point extends Component {
     _offset: Vec2 = new Vec2(960 / 2, 640 / 2);
 
     onLoad() {
-        this._updateEuler();
+        // this._updateEuler();
         this._updateSize();
     }
 
