@@ -94,16 +94,7 @@
       "tween": {
         "_value": true
       },
-      "websocket": {
-        "_value": false
-      },
-      "websocket-server": {
-        "_value": false
-      },
       "terrain": {
-        "_value": false
-      },
-      "light-probe": {
         "_value": false
       },
       "tiled-map": {
@@ -119,6 +110,15 @@
         "_value": false
       },
       "custom-pipeline": {
+        "_value": false
+      },
+      "websocket": {
+        "_value": false
+      },
+      "websocket-server": {
+        "_value": false
+      },
+      "light-probe": {
         "_value": false
       }
     },
