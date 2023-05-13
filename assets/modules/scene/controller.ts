@@ -51,6 +51,10 @@ export class sceneController extends Component {
     @property
     randomSize: number = 20;
 
+    // 发射速度
+    @property
+    emmiterSpeed: number = 30;
+
     // 发射初始位置
     @property({
         type: Vec2,
@@ -73,6 +77,7 @@ export class sceneController extends Component {
         this.emmiterList && this.emmiterList.children.forEach((node) => {
             const comp = node.getComponent('emmiter') as emmiter;
             if (comp) {
+                comp.setSpeed( this.emmiterSpeed)
                 comp.controlPointArray = this.pointList.children
                 comp.bucketPointArray = this.bucketList.children
                 comp.updater(deltaTime);
