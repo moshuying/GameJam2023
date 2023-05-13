@@ -103,7 +103,7 @@ export class point extends Component {
         this.node.setPosition(new Vec3(uiPos.x, uiPos.y));
     }
 
-    private _onTouchEnd(event:EventTouch){
+    private _onTouchEnded(event:EventTouch){
 
     }
 
