@@ -117,7 +117,7 @@ export class sceneController extends Component {
             return;
         }
         this.current = GameState.STOP;
-    
+        
         
     }
 }

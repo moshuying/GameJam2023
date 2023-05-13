@@ -5,6 +5,7 @@ import {
     Prefab,
     instantiate,
 } from 'cc';
+import { throttle } from '../../utils';
 
 const { ccclass, property } = _decorator;
 
@@ -32,7 +33,8 @@ export class start extends Component {
     rootNode: Node | null = null;
 
     start() {
-
+        this.nextScene = throttle(this.nextScene,120)
+        this.prevScene = throttle(this.prevScene,120)
     }
 
     update(deltaTime: number) {
@@ -51,7 +53,7 @@ export class start extends Component {
         }
         this.currentSceneNode = null;
 
-        const currentIndex = this.currentSceneIndex + 1;
+        const currentIndex = Math.min(this.currentSceneIndex + 1,this.sceneList.length-1);
 
         const prefab = this.sceneList[currentIndex];
         if (prefab) {
@@ -72,7 +74,7 @@ export class start extends Component {
         }
         this.currentSceneNode = null;
 
-        const currentIndex = this.currentSceneIndex - 1;
+        const currentIndex = Math.max(this.currentSceneIndex - 1,0);
 
         const prefab = this.sceneList[currentIndex];
         if (prefab) {
