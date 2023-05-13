@@ -1265,7 +1265,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": -53.313,
+      "x": -119.985,
       "y": 210.166,
       "z": 0
     }
@@ -2285,6 +2285,7 @@
     },
     "randomSize": 10,
     "emmiterSpeed": 30,
+    "turningStrength": 1,
     "beginPosition": {
       "__type__": "cc.Vec2",
       "x": -40,
