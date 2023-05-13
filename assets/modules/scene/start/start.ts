@@ -21,6 +21,11 @@ export class start extends Component {
     })
     startNodeList: Node[] = [];
 
+    @property({
+        type: [Node],
+    })
+    otherNodeList: Node[] = [];
+
     start() {
 
     }
@@ -31,7 +36,7 @@ export class start extends Component {
 
     // 
 
-    currentSceneIndex: number = 0;
+    currentSceneIndex: number = -1;
     currentSceneNode: Node | null = null;
 
     nextScene() {
@@ -39,17 +44,40 @@ export class start extends Component {
             const parent = this.currentSceneNode.getParent();
             parent.removeChild(this.currentSceneNode);
         }
+        this.currentSceneNode = null;
 
-        const prefab = this.sceneList[this.currentSceneIndex];
-        this.currentSceneNode = instantiate(prefab.data);
-        this.node.addChild(this.currentSceneNode);
-        this.currentSceneIndex++;
+        const currentIndex = this.currentSceneIndex + 1;
+
+        const prefab = this.sceneList[currentIndex];
+        if (prefab) {
+            this.currentSceneNode = instantiate(prefab.data);
+            this.node.addChild(this.currentSceneNode);
+        }
+        this.currentSceneIndex = currentIndex;
 
         // start 场景才显示
-        this.startNodeList.forEach(node => node.active = this.currentSceneIndex === 0);
+        this.startNodeList.forEach(node => node.active = currentIndex === -1);
+        this.otherNodeList.forEach(node => node.active = currentIndex !== -1);
     }
 
-    prefabScene() {
+    prevScene() {
+        if (this.currentSceneNode) {
+            const parent = this.currentSceneNode.getParent();
+            parent.removeChild(this.currentSceneNode);
+        }
+        this.currentSceneNode = null;
 
+        const currentIndex = this.currentSceneIndex - 1;
+
+        const prefab = this.sceneList[currentIndex];
+        if (prefab) {
+            this.currentSceneNode = instantiate(prefab.data);
+            this.node.addChild(this.currentSceneNode);
+        }
+        this.currentSceneIndex = currentIndex;
+
+        // start 场景才显示
+        this.startNodeList.forEach(node => node.active = currentIndex === -1);
+        this.otherNodeList.forEach(node => node.active = currentIndex !== -1);
     }
 }
