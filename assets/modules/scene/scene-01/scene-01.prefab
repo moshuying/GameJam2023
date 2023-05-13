@@ -471,7 +471,7 @@
     },
     "_loop": true,
     "_playOnAwake": true,
-    "_volume": 1,
+    "_volume": 0.8,
     "_id": ""
   },
   {
@@ -1039,8 +1039,8 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": -140.947,
+      "x": -335,
+      "y": 74,
       "z": 0
     }
   },
@@ -1231,8 +1231,8 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": -334.749,
-      "y": 73.41,
+      "x": 0,
+      "y": -141,
       "z": 0
     }
   },
@@ -2643,6 +2643,7 @@
     },
     "randomSize": 10,
     "emmiterSpeed": 30,
+    "turningStrength": 1,
     "beginPosition": {
       "__type__": "cc.Vec2",
       "x": 20,

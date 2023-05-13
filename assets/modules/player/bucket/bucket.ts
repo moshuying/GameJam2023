@@ -10,7 +10,6 @@ import {
     AudioSource,
     Tween
 } from 'cc';
-import { throttle } from '../../utils';
 
 const { ccclass, property } = _decorator;
 
@@ -42,7 +41,7 @@ export class bucket extends Component {
     _progress: number = 0;
     public audio: AudioSource = null!;
 
-    tween:Tween<bucket> = null;
+    tween: Tween<bucket> = null;
 
     _updateContentProgress() {
         this.content.scale = new Vec3(1, this._progress / 100, 1);
@@ -54,35 +53,26 @@ export class bucket extends Component {
         }
     }
 
-    // @property
-    // counterDelayTime:number = 10
     start() {
         this.audio = this.node.getComponent(AudioSource);
         this.tween = new Tween(this)
-        // this.addCounter = throttle(this.addCounter, this.counterDelayTime);
     }
 
     addingLastFrame = 0
     update(deltaTime: number) {
-        this.addingLastFrame++
+        this.addingLastFrame++;
     }
-    // 音量上升速度
-    // @property({
-    //     type: CCInteger,
-    //     slide: true,
-    //     min: 0,
-    //     max: 100,
-    //     step:1
-    // })
 
+    timer?: number;
     addCounter() {
-        this.tween.stop()
+        this.tween.stop();
         this.progress += 25;
-        this.addingLastFrame = 0
-        setTimeout(() => {
-            if(this.addingLastFrame<36)return;
-            this.tween.to(2.2,{progress:0}).start()
-        }, 3000)
+        this.addingLastFrame = 0;
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+            if(this.addingLastFrame < 36) return;
+            this.tween.to(2.2, { progress: 0 }).start();
+        }, 3000);
     }
 }
 
