@@ -65,9 +65,9 @@ export class bucket extends Component {
         // this.addCounter = throttle(this.addCounter, this.counterDelayTime);
     }
 
-
+    addingLastFrame = 0
     update(deltaTime: number) {
-
+        this.addingLastFrame++
     }
     // 音量上升速度
     // @property({
@@ -78,9 +78,13 @@ export class bucket extends Component {
     //     step:1
     // })
     volumeProgressSpeed:number = 25
+    isAdding:boolean = false
+
     addCounter() {
         this.progress += this.volumeProgressSpeed;
+        this.addingLastFrame = 0
         setTimeout(() => {
+            if(this.addingLastFrame<12)return;
             this.progress -= this.volumeProgressSpeed;
         }, 3000)
     }
