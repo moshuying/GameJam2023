@@ -49,7 +49,7 @@ export class sceneController extends Component {
 
     // 随机位置大小
     @property
-    randomSize: number = 200;
+    randomSize: number = 20;
 
     current: GameState = GameState.STOP;
 
@@ -64,12 +64,11 @@ export class sceneController extends Component {
                 return comp.progress >= 100;
             }
         });
-        const pointFull = this.pointList && this.pointList.children
         this.emmiterList && this.emmiterList.children.forEach((node) => {
             const comp = node.getComponent('emmiter') as emmiter;
             if (comp) {
-                comp.controlPointArray = pointFull
-                comp.bucketPointArray = this.bucketList && this.bucketList.children
+                comp.controlPointArray = this.pointList.children
+                comp.bucketPointArray = this.bucketList.children
                 comp.updater(deltaTime);
             }
         })
