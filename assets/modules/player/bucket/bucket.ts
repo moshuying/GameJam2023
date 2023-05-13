@@ -52,25 +52,13 @@ export class bucket extends Component {
     }
 
     onBeginContact (selfCollider: BoxCollider2D, otherCollider: BoxCollider2D, contact: IPhysics2DContact | null) {
-        // 只在两个碰撞体结束接触时被调用一次
-        // console.log('onBeginContact');
         this.addCounter();
+        // const collider = this.getComponent(BoxCollider2D);
+        // collider.enabled = false;
     }
-    // onEndContact (selfCollider: BoxCollider2D, otherCollider: BoxCollider2D, contact: IPhysics2DContact | null) {
-    //     // 只在两个碰撞体结束接触时被调用一次
-    //     console.log('onEndContact');
-    // }
-    // onPreSolve (selfCollider: BoxCollider2D, otherCollider: BoxCollider2D, contact: IPhysics2DContact | null) {
-    //     // 每次将要处理碰撞体接触逻辑时被调用
-    //     console.log('onPreSolve');
-    // }
-    // onPostSolve (selfCollider: BoxCollider2D, otherCollider: BoxCollider2D, contact: IPhysics2DContact | null) {
-    //     // 每次处理完碰撞体接触逻辑时被调用
-    //     console.log('onPostSolve');
-    // }
 
     update(deltaTime: number) {
-        
+
     }
 
     addCounter() {

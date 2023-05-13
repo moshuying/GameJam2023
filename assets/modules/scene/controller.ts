@@ -47,7 +47,7 @@ export class sceneController extends Component {
 
     // 随机位置大小
     @property
-    randomSize: number = 30;
+    randomSize: number = 200;
 
     current: GameState = GameState.STOP;
 
@@ -76,10 +76,11 @@ export class sceneController extends Component {
         const node = instantiate(this.emmiter.data);
         const comp = node.getComponent('emmiter');
         comp.moveVector = new Vec3(
-            this.direction.x + Math.random() * this.randomSize,
-            this.direction.y + Math.random() * this.randomSize,
+            this.direction.x,
+            this.direction.y,
             0,
         );
+        node.position = new Vec3(Math.random() * this.randomSize, Math.random() * this.randomSize, 0);
         this.emmiterList.addChild(node);
     }
 

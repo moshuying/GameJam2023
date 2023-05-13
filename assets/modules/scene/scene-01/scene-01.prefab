@@ -2107,10 +2107,10 @@
     },
     "direction": {
       "__type__": "cc.Vec2",
-      "x": 2,
-      "y": 2
+      "x": 6,
+      "y": 6
     },
-    "randomSize": 50,
+    "randomSize": 200,
     "_id": ""
   },
   {
