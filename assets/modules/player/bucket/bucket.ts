@@ -7,6 +7,7 @@ import {
     IPhysics2DContact,
     PhysicsSystem2D,
     Vec3,
+    AudioSource,
 } from 'cc';
 
 const { ccclass, property } = _decorator;
@@ -38,9 +39,18 @@ export class bucket extends Component {
 
     _updateContentProgress() {
         this.content.scale = new Vec3(1, this._progress / 100, 1);
+        this._updateAudio();
+    }
+
+    private _audio: AudioSource = null!;
+    _updateAudio() {
+        if (this._audio) {
+            this._audio.volume = this._progress > 1 ? 1 : this._progress;
+        }
     }
 
     start() {
+        this._audio = this.node.getComponent(AudioSource);
     }
 
 
