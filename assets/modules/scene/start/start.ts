@@ -26,6 +26,11 @@ export class start extends Component {
     })
     otherNodeList: Node[] = [];
 
+    @property({
+        type: Node,
+    })
+    rootNode: Node | null = null;
+
     start() {
 
     }
@@ -51,7 +56,7 @@ export class start extends Component {
         const prefab = this.sceneList[currentIndex];
         if (prefab) {
             this.currentSceneNode = instantiate(prefab.data);
-            this.node.addChild(this.currentSceneNode);
+            this.rootNode.addChild(this.currentSceneNode);
         }
         this.currentSceneIndex = currentIndex;
 
@@ -72,7 +77,7 @@ export class start extends Component {
         const prefab = this.sceneList[currentIndex];
         if (prefab) {
             this.currentSceneNode = instantiate(prefab.data);
-            this.node.addChild(this.currentSceneNode);
+            this.rootNode.addChild(this.currentSceneNode);
         }
         this.currentSceneIndex = currentIndex;
 

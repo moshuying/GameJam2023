@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "scene-01",
+    "_name": "scene-03",
     "_objFlags": 0,
     "_native": "",
     "data": {
@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "scene-01",
+    "_name": "scene-03",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -298,7 +298,7 @@
       "__id__": 12
     },
     "_clip": {
-      "__uuid__": "f6427fbb-13c8-4ed7-a92e-65432f0e2531",
+      "__uuid__": "11f71263-d4a7-496d-bad1-e092c842cff4",
       "__expectedType__": "cc.AudioClip"
     },
     "_loop": true,
@@ -1573,7 +1573,7 @@
       "_clip"
     ],
     "value": {
-      "__uuid__": "0342125a-845c-45e9-97a2-6895371cf55a",
+      "__uuid__": "623c98fc-621c-4f17-8006-2b67e6f9456d",
       "__expectedType__": "cc.AudioClip"
     }
   },
@@ -1776,7 +1776,7 @@
       "_clip"
     ],
     "value": {
-      "__uuid__": "a465b53b-a0ec-48a3-b770-10b1adac177f",
+      "__uuid__": "0007f47c-4dc4-434f-bcd8-ec3dc4bb7e07",
       "__expectedType__": "cc.AudioClip"
     }
   },
@@ -1968,7 +1968,7 @@
       "_clip"
     ],
     "value": {
-      "__uuid__": "4868dc9f-9761-4776-8cd4-56084fd6d769",
+      "__uuid__": "f63d3e78-ea22-4b54-b530-4c813ca40414",
       "__expectedType__": "cc.AudioClip"
     }
   },
@@ -2160,7 +2160,7 @@
       "_clip"
     ],
     "value": {
-      "__uuid__": "f4df3097-813e-442b-a7ef-5dfc0e6bbe15",
+      "__uuid__": "e425952a-24d5-42b2-9b2e-92ff1fb52982",
       "__expectedType__": "cc.AudioClip"
     }
   },
@@ -2352,7 +2352,7 @@
       "_clip"
     ],
     "value": {
-      "__uuid__": "3294087e-bef4-42a5-b872-bb27955525e5",
+      "__uuid__": "2c856e64-2a70-4bcf-b309-eeb96d08a0c3",
       "__expectedType__": "cc.AudioClip"
     }
   },
