@@ -26,6 +26,5 @@ export class bucketInk extends bucket {
             }
         })
         this.bgNodes[index].active = true;
-        this._updateAudio();
     }
 }

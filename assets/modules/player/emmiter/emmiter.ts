@@ -7,7 +7,7 @@ const tempV3 = new Vec3()
 export class emmiter extends Component {
 
     public moveVector = new Vec3(-1, 1, 0)
-    public speed =30
+    public speed = 30;
     start() {
         this.moveVector.normalize().multiplyScalar(this.speed)
     }
