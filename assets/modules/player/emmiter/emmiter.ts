@@ -21,43 +21,21 @@ export class emmiter extends Component {
         this.controlPointArray.forEach(e=>{
             const position = e.getWorldPosition()
 
-            const targetRotVec = printSineAndCosineForAnAngle(e.getRotation().getEulerAngles(tempV3).z)
+            const eulerAngle = -e.angle
+            const targetRotVec = printSineAndCosineForAnAngle(eulerAngle)
             const currentRotVec = this.moveVector.clone()
+
             const angle = vectorAngle(
                 [targetRotVec.x,targetRotVec.y],
                 [currentRotVec.x,currentRotVec.y]   
             ) *180/Math.PI
             if(angle<=6){return}
 
-            // const nodeVector = Vec3.normalize(tempV3,rotation)
-    
             const size = e.getComponent('point') as point
             if(Vec3.distance(this.node.getWorldPosition(),position)<=size.size/2 ){
-                const sign = Math.sign(Vec3.cross(tempV3,targetRotVec,currentRotVec).z)
-                const finalRotateAngle = 5* this.speed/5 * (sign==0?1:-1) // 吸力则取负
                 this.moveVector.set(
-                    rotateRound(
-                        this.moveVector.clone(),
-                        printSineAndCosineForAnAngle(
-                            finalRotateAngle
-                        )
-                    )
+                    targetRotVec.normalize().multiplyScalar(this.speed)
                 )
-                // const cross = Vec3.cross(tempV3,this.moveVector,nodeVector)
-                // if(cross.equals(new Vec3(0,0,0),0.01)){
-                //     return
-                // }
-
-                // const temp = nodeVector.clone()
-                // rotateRound(temp,printSineAndCosineForAnAngle(90*(
-                //     (cross.x>0) && (cross.y>0) && (cross.z>0) ? 1 : -1
-                // )))
-
-                // const dot = Vec3.dot(this.moveVector,temp)
-                // this.moveVector.set(rotateRound(this.moveVector,printSineAndCosineForAnAngle(
-                //     (getAngleByDistance(Vec3.distance(this.node.position,position) )+this.speed/5)*((dot>>31)>=0?1:-1)
-                // )))
-                // console.log(dot>>31,dot,e.name)
             }
         })
         this.bucketPointArray.forEach(e=>{
