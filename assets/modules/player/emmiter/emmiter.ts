@@ -8,6 +8,8 @@ export class emmiter extends Component {
 
     public moveVector = new Vec3(-1, 1, 0)
     public speed = 5;
+    // @property
+    public widthSpeed = 1
     setSpeed(val:number){
         this.speed = val
         this.moveVector.normalize().multiplyScalar(this.speed)
@@ -38,10 +40,10 @@ export class emmiter extends Component {
             const size = e.getComponent('point') as point
             const depth = Vec3.distance(this.node.getWorldPosition(),position)
             if(depth<=size.size/2 ){
-                const widthAngle = 1- (180 - angle ) / 360
+                const widthAngle = 1- (180 - angle ) / 360 
                 const widthDepth = 1 - depth *2 / size.size
-                const widthSpeed = this.speed / 1e4
-                const angleToNumber = (widthAngle+widthDepth+widthSpeed)*0.7
+                const widthSpeed = this.speed / 1e4 
+                const angleToNumber = (widthAngle+widthDepth+widthSpeed)*0.7 * this.widthSpeed
                 Vec3.slerp(this.moveVector,this.moveVector.normalize(),targetRotVec.normalize(),angleToNumber)
                 this.moveVector.normalize().multiplyScalar(this.speed)
             }

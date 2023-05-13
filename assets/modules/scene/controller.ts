@@ -54,6 +54,9 @@ export class sceneController extends Component {
     // 发射速度
     @property
     emmiterSpeed: number = 30;
+    // 转弯力度
+    @property
+    public turningStrength = 1
 
     // 发射初始位置
     @property({
@@ -80,6 +83,7 @@ export class sceneController extends Component {
                 comp.setSpeed( this.emmiterSpeed)
                 comp.controlPointArray = this.pointList.children
                 comp.bucketPointArray = this.bucketList.children
+                comp.widthSpeed = this.turningStrength
                 comp.updater(deltaTime);
             }
         })
