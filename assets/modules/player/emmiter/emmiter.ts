@@ -7,7 +7,7 @@ const tempV3 = new Vec3()
 export class emmiter extends Component {
 
     public moveVector = new Vec3(-1, 1, 0)
-    public speed = 30;
+    public speed = 5;
     start() {
         this.moveVector.normalize().multiplyScalar(this.speed)
     }
@@ -32,10 +32,19 @@ export class emmiter extends Component {
             if(angle<=6){return}
 
             const size = e.getComponent('point') as point
-            if(Vec3.distance(this.node.getWorldPosition(),position)<=size.size/2 ){
-                this.moveVector.set(
-                    targetRotVec.normalize().multiplyScalar(this.speed)
-                )
+            const depth = Vec3.distance(this.node.getWorldPosition(),position)
+            if(depth<=size.size/2 ){
+                // targetRotVec.x = getOneSign(targetRotVec.x)
+                // targetRotVec.y = getOneSign(targetRotVec.y)
+                // targetRotVec.z = 0
+                // const nextMoveVector = Vec3.multiply(tempV3,this.moveVector,targetRotVec)
+                debugger
+                const angleToNumber = angle*(1-depth/size.size/2)*0.0005
+                Vec3.slerp(this.moveVector,this.moveVector.normalize(),targetRotVec.normalize(),angleToNumber)
+                this.moveVector.normalize().multiplyScalar(this.speed)
+                // this.moveVector.set(
+                //     targetRotVec.normalize().multiplyScalar(this.speed)
+                // )
             }
         })
         this.bucketPointArray.forEach(e=>{
@@ -82,6 +91,14 @@ function getAngleByDistance(distance:number){
     return Math.asin(distance/80)
 }
 
+function getOneSign(number:number){
+    if(number===0){
+        return Object.is(number,0)?1:-1
+    }else{
+        return Math.sign(0)
+    }
+
+}
 
 // const tempV3 = new Vec3()
 const tempQu = new Quat()
