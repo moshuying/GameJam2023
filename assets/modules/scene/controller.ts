@@ -122,7 +122,12 @@ export class sceneController extends Component {
         }
         this.current = GameState.STOP;
         
-        
+        this.bucketList && this.bucketList.children.forEach((node) => {
+            const comp = node.getComponent('bucket') as bucket;
+            if (comp) {
+                comp.lockMaxVolume();
+            }
+        });
     }
 }
 

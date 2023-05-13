@@ -41,7 +41,11 @@ export class bucket extends Component {
     _progress: number = 0;
     public audio: AudioSource = null!;
 
+    // 锁定最大音量
     tween: Tween<bucket> = null;
+    addingLastFrame = 0
+    lock: boolean = false;
+    timer?: number;
 
     _updateContentProgress() {
         this.content.scale = new Vec3(1, this._progress / 100, 1);
@@ -58,13 +62,14 @@ export class bucket extends Component {
         this.tween = new Tween(this)
     }
 
-    addingLastFrame = 0
     update(deltaTime: number) {
         this.addingLastFrame++;
     }
 
-    timer?: number;
     addCounter() {
+        if (this.lock) {
+            return;
+        }
         this.tween.stop();
         this.progress += 25;
         this.addingLastFrame = 0;
@@ -73,6 +78,12 @@ export class bucket extends Component {
             if(this.addingLastFrame < 36) return;
             this.tween.to(2.2, { progress: 0 }).start();
         }, 3000);
+    }
+
+    lockMaxVolume() {
+        clearTimeout(this.timer);
+        this.progress = 100;
+        this.lock = true;
     }
 }
 
