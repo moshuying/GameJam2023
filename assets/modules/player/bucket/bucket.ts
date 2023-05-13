@@ -50,11 +50,11 @@ export class bucket extends Component {
         }
     }
 
-    @property
-    counterDelayTime:number = 10
+    // @property
+    // counterDelayTime:number = 10
     start() {
         this.audio = this.node.getComponent(AudioSource);
-        this.addCounter = throttle(this.addCounter, this.counterDelayTime);
+        // this.addCounter = throttle(this.addCounter, this.counterDelayTime);
     }
 
 
