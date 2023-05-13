@@ -32,25 +32,27 @@ export class bucket extends Component {
     }
     set progress(val: number) {
         this._progress = val;
+        if (this._progress < 0) this._progress = 0;
+        if (this._progress > 100) this._progress = 100;
         this._updateContentProgress();
     }
     @property({ type: CCInteger })
-    _progress: number = 100;
+    _progress: number = 0;
 
     _updateContentProgress() {
         this.content.scale = new Vec3(1, this._progress / 100, 1);
         this._updateAudio();
     }
 
-    private _audio: AudioSource = null!;
+    public audio: AudioSource = null!;
     _updateAudio() {
-        if (this._audio) {
-            this._audio.volume = this._progress > 1 ? 1 : this._progress;
+        if (this.audio) {
+            this.audio.volume = this._progress > 1 ? 1 : this._progress;
         }
     }
 
     start() {
-        this._audio = this.node.getComponent(AudioSource);
+        this.audio = this.node.getComponent(AudioSource);
     }
 
 
