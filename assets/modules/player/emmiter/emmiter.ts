@@ -17,31 +17,29 @@ export class emmiter extends Component {
     i=0
     updater(deltaTime: number) {
         this.i++
-        // this.nearCheck(this.node.position.clone())
-            // const nodeVector = new Vec3(0.5,0,0)
         this.controlPointArray.forEach(e=>{
-            const {
-                position,
-            }=e
+            const {position}=e
+
             const rotation = e.getRotation().getEulerAngles(tempV3)
             const nodeVector = Vec3.normalize(tempV3,rotation)
-            const currentNodePosition = this.node.position.clone()
-            debugger
+    
+            const size = e.getComponent(UITransform).contentSize.width/2
+            if(Vec3.distance(this.node.position,position)<=size ){
+                const cross = Vec3.cross(tempV3,this.moveVector,nodeVector)
+                if(cross.equals(new Vec3(0,0,0),0.01)){
+                    return
+                }
 
-            if(Vec3.distance(this.node.position,position)<=80 ){
-                const cross =   currentNodePosition.cross(nodeVector)
-                this.moveVector.set(rotateRound(this.moveVector,printSineAndCosineForAnAngle(
-                    getAngleByDistance(Vec3.distance(this.node.position,position) )+this.speed/5
+                const temp = nodeVector.clone()
+                rotateRound(temp,printSineAndCosineForAnAngle(90*(
+                    (cross.x>0) && (cross.y>0) && (cross.z>0) ? 1 : -1
                 )))
-                // if(!temp1.multiply(temp2).equals(new Vec3(0,0,0),0.01)){
-                //     this.moveVector.set(rotateRound(this.moveVector,new Vec3(100,1,0))).normalize()
-                // }else{
-                //     console.log('方向相等',temp1.toString(),temp2.toString())
-                // }
-                // if(!this.moveVector.multiply(nodeVector).equals(new Vec3(0,0,0),0.1)){
-                // }else{
-                //     console.log('方向大致相等',this.moveVector.toString(),nodeVector.toString())
-                // }
+
+                const dot = Vec3.dot(this.moveVector,temp)
+                this.moveVector.set(rotateRound(this.moveVector,printSineAndCosineForAnAngle(
+                    (getAngleByDistance(Vec3.distance(this.node.position,position) )+this.speed/5)*((dot>>31)>=0?1:-1)
+                )))
+                console.log(dot>>31,dot,e.name)
             }
         })
         this.bucketPointArray.forEach(e=>{
@@ -60,7 +58,7 @@ export class emmiter extends Component {
                     && emmiterposition.y<aabb.ymax && emmiterposition.y>aabb.ymin){
                     bucket.addCounter()
                 }
-                }
+            }
         })
         this.node.setPosition(this.node.position.add(this.moveVector))
     }
@@ -72,11 +70,18 @@ const vec3Reflect = (out:Vec3,a:Vec3,normal:Vec3)=>{
 }
 
 function printSineAndCosineForAnAngle(angleInDegrees) {
-const angleInRadians = angleInDegrees * Math.PI / 180;
-const s = Math.sin(angleInRadians);
-const c = Math.cos(angleInRadians);
+    const angleInRadians = angleInDegrees * Math.PI / 180;
+    const s = Math.sin(angleInRadians);
+    const c = Math.cos(angleInRadians);
 return new Vec3(s,c,0)  
 }
+
+const vectorAngle = (x, y) => {
+    let mX = Math.sqrt(x.reduce((acc, n) => acc + Math.pow(n, 2), 0));
+    let mY = Math.sqrt(y.reduce((acc, n) => acc + Math.pow(n, 2), 0));
+    return Math.acos(x.reduce((acc, n, i) => acc + n * y[i], 0) / (mX * mY));
+  };
+
 function getAngleByDistance(distance:number){
     return Math.asin(distance/80)
 }
