@@ -34,6 +34,7 @@ export class bucket extends Component {
     }
     set progress(val: number) {
         this._progress = Math.min(Math.max(val, 0), 100);
+
         this._updateContentProgress();
         this._updateAudio();
     }
@@ -41,7 +42,7 @@ export class bucket extends Component {
     _progress: number = 0;
     public audio: AudioSource = null!;
 
-    // tween:Tween<AudioSource> = null;
+    tween:Tween<bucket> = null;
 
     _updateContentProgress() {
         this.content.scale = new Vec3(1, this._progress / 100, 1);
@@ -49,11 +50,7 @@ export class bucket extends Component {
 
     _updateAudio() {
         if (this.audio) {
-            // this.tween.stop()
-            // this.tween.to(0.2,{volume:this._progress > 1 ? 1 : this._progress}).start()
-            // moveTo(this.audio.volume, this._progress > 1 ? 1 : this._progress)
-            // this.tween.to(0.5,this._progress > 1 ? 1 : this._progress).start()
-            this.audio.volume = this._progress > 1 ? 1 : this._progress;
+            this.audio.volume = this._progress / 100;
         }
     }
 
@@ -61,7 +58,7 @@ export class bucket extends Component {
     // counterDelayTime:number = 10
     start() {
         this.audio = this.node.getComponent(AudioSource);
-        // this.tween = new Tween(this.audio)
+        this.tween = new Tween(this)
         // this.addCounter = throttle(this.addCounter, this.counterDelayTime);
     }
 
@@ -77,15 +74,14 @@ export class bucket extends Component {
     //     max: 100,
     //     step:1
     // })
-    volumeProgressSpeed:number = 25
-    isAdding:boolean = false
 
     addCounter() {
-        this.progress += this.volumeProgressSpeed;
+        this.tween.stop()
+        this.progress += 25;
         this.addingLastFrame = 0
         setTimeout(() => {
-            if(this.addingLastFrame<12)return;
-            this.progress -= this.volumeProgressSpeed;
+            if(this.addingLastFrame<36)return;
+            this.tween.to(2.2,{progress:0}).start()
         }, 3000)
     }
 }
