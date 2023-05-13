@@ -13,6 +13,8 @@ import {
     Prefab,
     instantiate,
 } from 'cc';
+import { bucket } from '../player/bucket/bucket';
+import { emmiter } from '../player/emmiter/emmiter';
 const { ccclass, property,type } = _decorator;
 
 enum GameState {
@@ -36,8 +38,8 @@ export class sceneController extends Component {
     @property({type: Node})
     bucketList: Node | null = null ;
 
-    @property({type: [Node]})
-    controllerList: Node[] = [];
+    @property({type: Node})
+    pointList: Node | null = null ;
 
     // 发射方向
     @property({
@@ -62,6 +64,12 @@ export class sceneController extends Component {
                 return comp.progress >= 100;
             }
         });
+        this.emmiterList && this.emmiterList.children.forEach((node) => {
+            const comp = node.getComponent('emmiter') as emmiter;
+            if (comp) {
+                comp.updater(deltaTime);
+            }
+        })
         if (bucketFull) {
             this._onBucketFull();
         }
