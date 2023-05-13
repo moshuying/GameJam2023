@@ -112,8 +112,8 @@ export class sceneController extends Component {
             return;
         }
         this.current = GameState.STOP;
-        debugger;
-        alert('GUO GUAN')
+    
+        
     }
 }
 
