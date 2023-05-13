@@ -13,8 +13,7 @@ import {
     Prefab,
     instantiate,
 } from 'cc';
-import type { bucket } from '../player/bucket/bucket';
-const { ccclass, property } = _decorator;
+const { ccclass, property,type } = _decorator;
 
 enum GameState {
     STOP = 0,
@@ -34,10 +33,11 @@ export class sceneController extends Component {
     })
     emmiterList: Node | null = null;
 
-    @property({
-        type: Node,
-    })
-    bucketList: Node | null = null;
+    @property({type: Node})
+    bucketList: Node | null = null ;
+
+    @property({type: [Node]})
+    controllerList: Node[] = [];
 
     // 发射方向
     @property({

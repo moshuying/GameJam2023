@@ -188,7 +188,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 383.7547892720306,
+    "_orthoHeight": 364.4106463878327,
     "_near": 0,
     "_far": 1000,
     "_color": {
@@ -2105,6 +2105,7 @@
     "bucketList": {
       "__id__": 60
     },
+    "controllerList": null,
     "direction": {
       "__type__": "cc.Vec2",
       "x": 6,

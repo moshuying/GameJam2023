@@ -2,7 +2,6 @@ import {
     _decorator,
     CCInteger,
     Component,
-    BoxCollider2D,
     Contact2DType,
     Node,
     IPhysics2DContact,
@@ -42,20 +41,8 @@ export class bucket extends Component {
     }
 
     start() {
-        const collider = this.getComponent(BoxCollider2D);
-        if (collider) {
-            collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
-            // collider.on(Contact2DType.END_CONTACT, this.onEndContact, this);
-            // collider.on(Contact2DType.PRE_SOLVE, this.onPreSolve, this);
-            // collider.on(Contact2DType.POST_SOLVE, this.onPostSolve, this);
-        }
     }
 
-    onBeginContact (selfCollider: BoxCollider2D, otherCollider: BoxCollider2D, contact: IPhysics2DContact | null) {
-        this.addCounter();
-        // const collider = this.getComponent(BoxCollider2D);
-        // collider.enabled = false;
-    }
 
     update(deltaTime: number) {
 
