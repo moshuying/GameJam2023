@@ -8,6 +8,7 @@ import {
     PhysicsSystem2D,
     Vec3,
     AudioSource,
+    Tween
 } from 'cc';
 import { throttle } from '../../utils';
 
@@ -40,13 +41,19 @@ export class bucket extends Component {
     _progress: number = 0;
     public audio: AudioSource = null!;
     
+    tween:Tween<AudioSource> = null;
+
     _updateContentProgress() {
         this.content.scale = new Vec3(1, this._progress / 100, 1);
     }
 
     _updateAudio() {
         if (this.audio) {
-            this.audio.volume = this._progress > 1 ? 1 : this._progress;
+            this.tween.stop()
+            this.tween.to(0.2,{volume:this._progress > 1 ? 1 : this._progress}).start()
+            // moveTo(this.audio.volume, this._progress > 1 ? 1 : this._progress)
+            // this.tween.to(0.5,this._progress > 1 ? 1 : this._progress).start()
+            // this.audio.volume = this._progress > 1 ? 1 : this._progress;
         }
     }
 
@@ -54,6 +61,7 @@ export class bucket extends Component {
     // counterDelayTime:number = 10
     start() {
         this.audio = this.node.getComponent(AudioSource);
+        this.tween = new Tween(this.audio)
         // this.addCounter = throttle(this.addCounter, this.counterDelayTime);
     }
 
