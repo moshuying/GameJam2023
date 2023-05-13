@@ -1,46 +1,38 @@
-import { _decorator, Collider2D, Component, Contact2DType, IPhysics2DContact, Node, Quat, Vec3 } from 'cc';
+import { _decorator, Collider2D, Component, Contact2DType, IPhysics2DContact, Node, Quat, UITransform, Vec3 } from 'cc';
+import { bucket } from '../bucket/bucket';
 const { ccclass, property } = _decorator;
 const tempV3 = new Vec3()
 @ccclass('emmiter')
 export class emmiter extends Component {
 
     public moveVector = new Vec3(-1, 1, 0)
-    public speed =20
+    public speed =30
     start() {
         this.moveVector.normalize().multiplyScalar(this.speed)
-
     }
 
-    testPositionArray = [
-        new Vec3(1.5,193,0),
-        new Vec3(265,172),
-        new Vec3(-265,175),
-    ]
+    controlPointArray:Node[] = []
+    bucketPointArray:Node[] = []
     tempV3 = new Vec3
-
-    nearCheck(a:Vec3){
-        const vector1=new Vec3(0,0,0)
-        this.testPositionArray.forEach(e=>{
-            if(Vec3.distance(a,e)<=80 ){
-                // 0.92,-0.38)
-                // this.moveVector.set(rotateRound(this.moveVector,new Vec3(0.01,-0.01)))
-            }
-        })
-        return vector1
-    }
     i=0
     updater(deltaTime: number) {
         this.i++
         // this.nearCheck(this.node.position.clone())
-            const nodeVector = new Vec3(0.5,0,0)
-        this.testPositionArray.forEach(e=>{
-            if(Vec3.distance(this.node.position,e)<=80 ){
-                const temp1 = this.moveVector.clone().normalize()
-                const temp2 = nodeVector.clone().normalize()
+            // const nodeVector = new Vec3(0.5,0,0)
+        this.controlPointArray.forEach(e=>{
+            const {
+                position,
+            }=e
+            const rotation = e.getRotation().getEulerAngles(tempV3)
+            const nodeVector = Vec3.normalize(tempV3,rotation)
+            const currentNodePosition = this.node.position.clone()
+            debugger
+
+            if(Vec3.distance(this.node.position,position)<=80 ){
+                const cross =   currentNodePosition.cross(nodeVector)
                 this.moveVector.set(rotateRound(this.moveVector,printSineAndCosineForAnAngle(
-                    getAngleByDistance(Vec3.distance(this.node.position,e) )+this.speed/5
-                    )
-                    ))
+                    getAngleByDistance(Vec3.distance(this.node.position,position) )+this.speed/5
+                )))
                 // if(!temp1.multiply(temp2).equals(new Vec3(0,0,0),0.01)){
                 //     this.moveVector.set(rotateRound(this.moveVector,new Vec3(100,1,0))).normalize()
                 // }else{
@@ -51,6 +43,24 @@ export class emmiter extends Component {
                 //     console.log('方向大致相等',this.moveVector.toString(),nodeVector.toString())
                 // }
             }
+        })
+        this.bucketPointArray.forEach(e=>{
+            const bucket = e.getComponent('bucket') as bucket
+            if(bucket){
+                const uiSize = e.getComponent(UITransform)
+                const position = e.getWorldPosition()
+                const aabb = {
+                    xmin :position.x-uiSize.contentSize.width/2,
+                    xmax:position.x+uiSize.contentSize.width/2,
+                    ymin:position.y-uiSize.contentSize.height/2,
+                    ymax:position.y+uiSize.contentSize.height/2,
+                }
+                const emmiterposition = this.node.getWorldPosition()
+                if(emmiterposition.x<aabb.xmax && emmiterposition.x>aabb.xmin
+                    && emmiterposition.y<aabb.ymax && emmiterposition.y>aabb.ymin){
+                    bucket.addCounter()
+                }
+                }
         })
         this.node.setPosition(this.node.position.add(this.moveVector))
     }
