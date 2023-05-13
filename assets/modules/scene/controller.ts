@@ -13,6 +13,7 @@ import {
     Prefab,
     instantiate,
 } from 'cc';
+import { bucket } from '../player/bucket/bucket';
 const { ccclass, property,type } = _decorator;
 
 enum GameState {
