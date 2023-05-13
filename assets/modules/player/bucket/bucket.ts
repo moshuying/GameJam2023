@@ -32,19 +32,17 @@ export class bucket extends Component {
     }
     set progress(val: number) {
         this._progress = val;
-        if (this._progress < 0) this._progress = 0;
-        if (this._progress > 100) this._progress = 100;
         this._updateContentProgress();
+        this._updateAudio();
     }
     @property({ type: CCInteger })
     _progress: number = 0;
-
+    public audio: AudioSource = null!;
+    
     _updateContentProgress() {
         this.content.scale = new Vec3(1, this._progress / 100, 1);
-        this._updateAudio();
     }
 
-    public audio: AudioSource = null!;
     _updateAudio() {
         if (this.audio) {
             this.audio.volume = this._progress > 1 ? 1 : this._progress;
@@ -61,9 +59,9 @@ export class bucket extends Component {
     }
 
     addCounter() {
-        this.progress += 50;
+        this.progress += 20;
         setTimeout(() => {
-            this.progress -= 50;
+            this.progress -= 20;
         }, 3000)
     }
 }

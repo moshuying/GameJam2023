@@ -92,12 +92,16 @@ export class sceneController extends Component {
         const node = instantiate(this.emmiter.data);
         const comp = node.getComponent('emmiter');
         comp.moveVector = new Vec3(
-            this.direction.x,
-            this.direction.y,
+            this.direction.x + Math.random() / 5,
+            this.direction.y + Math.random() / 5,
             0,
         );
         node.position = new Vec3(this.beginPosition.x + Math.random() * this.randomSize, this.beginPosition.y + Math.random() * this.randomSize, 0);
         this.emmiterList.addChild(node);
+
+        setTimeout(() => {
+            this.emmiterList.removeChild(node);
+        }, 3000);
     }
 
     /**
@@ -109,6 +113,7 @@ export class sceneController extends Component {
         }
         this.current = GameState.STOP;
         debugger;
+        alert('GUO GUAN')
     }
 }
 
