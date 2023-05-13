@@ -51,6 +51,12 @@ export class sceneController extends Component {
     @property
     randomSize: number = 20;
 
+    // 发射初始位置
+    @property({
+        type: Vec2,
+    })
+    beginPosition: Vec2 = new Vec2(0, 0);
+
     current: GameState = GameState.STOP;
 
     start() {
@@ -90,7 +96,7 @@ export class sceneController extends Component {
             this.direction.y,
             0,
         );
-        node.position = new Vec3(Math.random() * this.randomSize, Math.random() * this.randomSize, 0);
+        node.position = new Vec3(this.beginPosition.x + Math.random() * this.randomSize, this.beginPosition.y + Math.random() * this.randomSize, 0);
         this.emmiterList.addChild(node);
     }
 
