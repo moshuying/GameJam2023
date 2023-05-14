@@ -12,9 +12,12 @@ import {
     Vec3,
     Prefab,
     instantiate,
+    Animation,
 } from 'cc';
 import { bucket } from '../player/bucket/bucket';
 import { emmiter } from '../player/emmiter/emmiter';
+import type { start } from './start/start';
+
 const { ccclass, property,type } = _decorator;
 
 enum GameState {
@@ -57,6 +60,11 @@ export class sceneController extends Component {
     // 转弯力度
     @property
     public turningStrength = 1
+
+    @property({
+        type: Node,
+    })
+    gameEndNode: Node | null = null;
 
     // 发射初始位置
     @property({
@@ -128,6 +136,18 @@ export class sceneController extends Component {
                 comp.lockMaxVolume();
             }
         });
+        
+        if (this.gameEndNode) {
+            this.gameEndNode.active = true;
+            const comp = this.gameEndNode.getComponent(Animation);
+            comp.play('game-end');
+        }
+    }
+
+    nextScene() {
+        const startNode = this.node.getParent().getParent();
+        const startComp = startNode.getComponent('start') as start;
+        startComp.nextScene();
     }
 }
 
