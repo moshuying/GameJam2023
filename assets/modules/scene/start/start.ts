@@ -27,6 +27,10 @@ export class start extends Component {
         type: Node,
     })
     rootNode: Node | null = null;
+    @property({
+        type: Node,
+    })
+    soundNode: Node | null = null;
 
     start() {
         this.nextScene = throttle(this.nextScene,120)
@@ -73,6 +77,7 @@ export class start extends Component {
         // start 场景才显示
         this.startNodeList.forEach(node => node.active = currentIndex === -1);
         this.selectLevelNode.active = false
+        this.soundNode.active = currentIndex === -1
     }
 
     prevScene() {
@@ -94,5 +99,6 @@ export class start extends Component {
         // start 场景才显示
         this.startNodeList.forEach(node => node.active = currentIndex === -1);
         this.selectLevelNode.active = false
+        this.soundNode.active = currentIndex === -1
     }
 }
