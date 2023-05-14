@@ -143,6 +143,14 @@ export class sceneController extends Component {
             comp.play('game-end');
         }
     }
+    
+    @property({
+        type:Node
+    })
+    descriptionNode:Node | null = null
+    startGame(){
+        this.descriptionNode.active = false
+    }
 
     nextScene() {
         const startNode = this.node.getParent().getParent();
