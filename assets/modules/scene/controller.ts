@@ -76,6 +76,8 @@ export class sceneController extends Component {
 
     start() {
         this.current = GameState.START;
+        this.pauseButton.active = false
+        this.pauseBG.active = false
     }
 
     update(deltaTime: number) {
@@ -143,19 +145,52 @@ export class sceneController extends Component {
             comp.play('game-end');
         }
     }
-    
+
     @property({
         type:Node
     })
     descriptionNode:Node | null = null
     startGame(){
         this.descriptionNode.active = false
+        this.pauseButton.active = true
+        this.current = GameState.START
+        this.resumeGame()
     }
 
-    nextScene() {
+    @property({
+        type:Node
+    })
+    pauseButton:Node | null = null
+
+    @property({
+        type:Node
+    })
+    pauseBG:Node | null = null
+    pauseGame(){
+        this.pauseBG.active = true
+        this.pauseButton.active = false
+    }
+
+    resumeGame(){
+        this.pauseBG.active = false
+        this.pauseButton.active = true
+    }
+    quitGame(){
+        this.nextScene(-1)
+    }
+    restartGame(){
+        this.nextScene()
+        this.prevScene()
+    }
+    nextScene(index?:number) {
         const startNode = this.node.getParent().getParent();
         const startComp = startNode.getComponent('start') as start;
-        startComp.nextScene();
+        startComp.nextScene(null,index);
+    }
+    prevScene() {
+        const startNode = this.node.getParent().getParent();
+        const startComp = startNode.getComponent('start') as start;
+        startComp.prevScene();
     }
 }
 
