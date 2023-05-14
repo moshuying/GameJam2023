@@ -53,7 +53,11 @@ export class start extends Component {
         }
         this.currentSceneNode = null;
 
-        const currentIndex = Math.min(this.currentSceneIndex + 1,this.sceneList.length-1);
+        let currentIndex = Math.min(this.currentSceneIndex + 1, this.sceneList.length - 1);
+
+        if (this.currentSceneIndex + 1 > this.sceneList.length - 1) {
+            currentIndex = -1;
+        }
 
         const prefab = this.sceneList[currentIndex];
         if (prefab) {
@@ -74,7 +78,7 @@ export class start extends Component {
         }
         this.currentSceneNode = null;
 
-        const currentIndex = Math.max(this.currentSceneIndex - 1,0);
+        const currentIndex = Math.max(this.currentSceneIndex - 1, -1);
 
         const prefab = this.sceneList[currentIndex];
         if (prefab) {
