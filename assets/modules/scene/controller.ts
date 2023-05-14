@@ -179,9 +179,12 @@ export class sceneController extends Component {
         this.nextScene(-1)
     }
     restartGame(){
-        this.nextScene()
-        this.prevScene()
+        const startNode = this.node.getParent().getParent();
+        const startComp = startNode.getComponent('start') as start;
+        startComp.currentSceneIndex
+        startComp.nextScene(null,startComp.currentSceneIndex)
     }
+
     nextScene(index?:number) {
         const startNode = this.node.getParent().getParent();
         const startComp = startNode.getComponent('start') as start;
