@@ -64,7 +64,7 @@ export class start extends Component {
         if (this.currentSceneIndex + 1 > this.sceneList.length - 1) {
             currentIndex = -1;
         }
-        if(index){
+        if(index&& Number.isInteger(index)){
             currentIndex = index
         }
         const prefab = this.sceneList[currentIndex];
