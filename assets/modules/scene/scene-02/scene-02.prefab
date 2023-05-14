@@ -2716,7 +2716,7 @@
       "b": 214,
       "a": 0
     },
-    "_string": "你展现了出色的解谜技巧和决策能力。然而，这只是冒\n险的开始。前方的道路将变得更加艰险，你需要更加聪\n明和勇敢。继续前行，揭开更多谜题的秘密！",
+    "_string": "你的智慧和耐心令人钦佩。但是，真正的挑战即将到来。\n前方的谜题更加复杂，需要你发挥你的创造力和洞察力。\n相信自己，你已经走得很远，继续前进吧！",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 20,
@@ -3150,6 +3150,7 @@
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
     "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": [
       {
         "__id__": 112
