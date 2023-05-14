@@ -48,7 +48,7 @@ export class start extends Component {
 
     currentSceneIndex: number = -1;
     currentSceneNode: Node | null = null;
-    nextScene(touch:EventTouch,index:number) {
+    nextScene(touch?:EventTouch,index?:number) {
         if (this.currentSceneNode) {
             const parent = this.currentSceneNode.getParent();
             parent.removeChild(this.currentSceneNode);
