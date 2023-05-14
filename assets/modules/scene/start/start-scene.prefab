@@ -2001,7 +2001,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Button-003",
+    "_name": "selectLevelButton",
     "_objFlags": 0,
     "_parent": {
       "__id__": 61
@@ -2011,7 +2011,7 @@
         "__id__": 84
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 90
