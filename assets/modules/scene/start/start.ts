@@ -4,6 +4,7 @@ import {
     Node,
     Prefab,
     instantiate,
+    EventTouch,
 } from 'cc';
 import { throttle } from '../../utils';
 
@@ -23,11 +24,6 @@ export class start extends Component {
     startNodeList: Node[] = [];
 
     @property({
-        type: [Node],
-    })
-    otherNodeList: Node[] = [];
-
-    @property({
         type: Node,
     })
     rootNode: Node | null = null;
@@ -41,12 +37,18 @@ export class start extends Component {
         
     }
 
-    // 
+    @property({
+        type: Node,
+    })
+    selectLevelNode: Node | null = null;
+    toSelectLevel(){
+        this.startNodeList.forEach(node => node.active = false);
+        this.selectLevelNode.active = true
+    }
 
     currentSceneIndex: number = -1;
     currentSceneNode: Node | null = null;
-
-    nextScene() {
+    nextScene(touch:EventTouch,index:number) {
         if (this.currentSceneNode) {
             const parent = this.currentSceneNode.getParent();
             parent.removeChild(this.currentSceneNode);
@@ -58,7 +60,9 @@ export class start extends Component {
         if (this.currentSceneIndex + 1 > this.sceneList.length - 1) {
             currentIndex = -1;
         }
-
+        if(index){
+            currentIndex = index
+        }
         const prefab = this.sceneList[currentIndex];
         if (prefab) {
             this.currentSceneNode = instantiate(prefab.data);
@@ -68,7 +72,7 @@ export class start extends Component {
 
         // start 场景才显示
         this.startNodeList.forEach(node => node.active = currentIndex === -1);
-        this.otherNodeList.forEach(node => node.active = currentIndex !== -1);
+        this.selectLevelNode.active = false
     }
 
     prevScene() {
@@ -89,6 +93,6 @@ export class start extends Component {
 
         // start 场景才显示
         this.startNodeList.forEach(node => node.active = currentIndex === -1);
-        this.otherNodeList.forEach(node => node.active = currentIndex !== -1);
+        this.selectLevelNode.active = false
     }
 }
