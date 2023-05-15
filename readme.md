@@ -38,6 +38,10 @@
 
 <img width="959" alt="WechatIMG1648" src="https://github.com/VisualSJ/GameJam2023/assets/7113508/a4f91517-71d0-433f-a6ad-ec0ef8110b90">
 
+<img width="960" alt="WechatIMG1649" src="https://github.com/VisualSJ/GameJam2023/assets/7113508/13db2da8-b3ca-4704-a94c-1d09127f5b6a">
+
 <img width="959" alt="WechatIMG1650" src="https://github.com/VisualSJ/GameJam2023/assets/7113508/c5286a10-5c88-4762-85ad-d6e7883de189">
 
-<img width="960" alt="WechatIMG1649" src="https://github.com/VisualSJ/GameJam2023/assets/7113508/13db2da8-b3ca-4704-a94c-1d09127f5b6a">
+## 开发环境
+
+引擎： CocosCreator 3.7.3
