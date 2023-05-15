@@ -5,17 +5,16 @@
  * @returns {Function}
  */
 export function throttle(fn, delay) {
-  var timer = null;
-  var timeStamp = (new Date()).getTime();
-  return function() {
-    var context = this;  //获取函数所在作用域this
-    var args = arguments;  //取得传入参数
-    if((new Date()).getTime()-timeStamp>delay){
-        timeStamp = (new Date()).getTime();
-        timer = setTimeout(function(){
-        fn.apply(context,args);
-      },delay);
-    }
-
-  }
+    var timer = null;
+    var timeStamp = new Date().getTime();
+    return function () {
+        var context = this; //获取函数所在作用域this
+        var args = arguments; //取得传入参数
+        if (new Date().getTime() - timeStamp > delay) {
+            timeStamp = new Date().getTime();
+            timer = setTimeout(function () {
+                fn.apply(context, args);
+            }, delay);
+        }
+    };
 }

@@ -1,21 +1,9 @@
-import {
-    _decorator,
-    CCInteger,
-    Component,
-    Contact2DType,
-    Node,
-    IPhysics2DContact,
-    PhysicsSystem2D,
-    Vec3,
-    AudioSource,
-    Tween
-} from 'cc';
+import { _decorator, CCInteger, Component, Contact2DType, Node, IPhysics2DContact, PhysicsSystem2D, Vec3, AudioSource, Tween } from 'cc';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('bucket')
 export class bucket extends Component {
-
     @property({ type: Node })
     background: Node | null = null;
 
@@ -43,7 +31,7 @@ export class bucket extends Component {
 
     // 锁定最大音量
     tween: Tween<bucket> = null;
-    addingLastFrame = 0
+    addingLastFrame = 0;
     lock: boolean = false;
     timer?: number;
 
@@ -59,7 +47,7 @@ export class bucket extends Component {
 
     start() {
         this.audio = this.node.getComponent(AudioSource);
-        this.tween = new Tween(this)
+        this.tween = new Tween(this);
     }
 
     update(deltaTime: number) {
@@ -75,7 +63,7 @@ export class bucket extends Component {
         this.addingLastFrame = 0;
         clearTimeout(this.timer);
         this.timer = setTimeout(() => {
-            if(this.addingLastFrame < 36) return;
+            if (this.addingLastFrame < 36) return;
             this.tween.to(2.2, { progress: 0 }).start();
         }, 3000);
     }
@@ -86,5 +74,3 @@ export class bucket extends Component {
         this.lock = true;
     }
 }
-
-

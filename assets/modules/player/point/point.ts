@@ -3,20 +3,7 @@
  * 包含方向、圆大小、位置
  */
 
-import {
-    _decorator,
-    ccenum,
-    
-    Component,
-    UITransform,
-
-    Vec2,
-    Vec3,
-    Size,
-
-    EventTouch,
-    NodeEventType,
-} from 'cc';
+import { _decorator, ccenum, Component, UITransform, Vec2, Vec3, Size, EventTouch, NodeEventType } from 'cc';
 const { ccclass, property } = _decorator;
 
 enum PointDirectionEnum {
@@ -25,19 +12,18 @@ enum PointDirectionEnum {
     DOWN = 2,
     LEFT = 3,
     AUTO = 4,
-};
+}
 ccenum(PointDirectionEnum);
 
 @ccclass('point')
 export class point extends Component {
-
     /**
      * 控制点方向
      */
     @property({
         type: PointDirectionEnum,
     })
-    get direction() : PointDirectionEnum {
+    get direction(): PointDirectionEnum {
         return this._direction;
     }
     set direction(val: PointDirectionEnum) {
@@ -90,10 +76,7 @@ export class point extends Component {
     }
     private _onTouchBegan(event: EventTouch) {
         const uiPos = event.getUILocation();
-        this._offset = new Vec2(
-            uiPos.x - this.node.position.x,
-            uiPos.y - this.node.position.y,
-        );
+        this._offset = new Vec2(uiPos.x - this.node.position.x, uiPos.y - this.node.position.y);
     }
 
     private _onTouchMove(event: EventTouch) {
@@ -103,13 +86,7 @@ export class point extends Component {
         this.node.setPosition(new Vec3(uiPos.x, uiPos.y));
     }
 
-    private _onTouchEnded(event:EventTouch){
+    private _onTouchEnded(event: EventTouch) {}
 
-    }
-
-    update(deltaTime: number) {
-        
-    }
-
+    update(deltaTime: number) {}
 }
-

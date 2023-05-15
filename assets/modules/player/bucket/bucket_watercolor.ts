@@ -1,18 +1,11 @@
-import {
-    _decorator,
-    CCInteger,
-    Node,
-    Sprite,
-    Vec3,
-} from 'cc';
+import { _decorator, CCInteger, Node, Sprite, Vec3 } from 'cc';
 import { bucket } from './bucket';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('bucketWaterColor')
 export class bucketInk extends bucket {
-
-    @property( { type: [Node]})
+    @property({ type: [Node] })
     bgNodes: Node[] = [];
 
     _updateContentProgress() {
@@ -24,7 +17,7 @@ export class bucketInk extends bucket {
             if (sp.active) {
                 sp.active = false;
             }
-        })
+        });
         this.bgNodes[index].active = true;
     }
 }
