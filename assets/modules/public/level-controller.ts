@@ -175,8 +175,8 @@ export class levelController extends Component {
 
     /**
      * 为 Button 写的函数
-     * @param event 
-     * @param level 
+     * @param event
+     * @param level
      */
     private onButtonRunLevel(event: EventTouch, level?: string) {
         runLevel(level ? parseInt(level) : undefined);
@@ -184,8 +184,8 @@ export class levelController extends Component {
 
     /**
      * 为 Button 写的函数
-     * @param event 
-     * @param level 
+     * @param event
+     * @param level
      */
     private onButtonRunScene(event: EventTouch, name: string) {
         runScene(name);

@@ -10,7 +10,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('sceneController')
 export class sceneController extends Component {
-
     @property({
         tooltip: '这个场景的唯一 ID，后续操作的时候，使用的就是这个名字',
     })
@@ -27,24 +26,20 @@ export class sceneController extends Component {
      * 当场景进入的时候触发的函数
      * 先退出之前的场景，然后才会进入这个场景
      */
-    public async fadeIn() {
-        
-    }
+    public async fadeIn() {}
 
     /**
      * 当场景退出的时候触发的函数
      * 先退出这个场景，然后才会进入其他场景
      */
-    public async fadeOut() {
-
-    }
+    public async fadeOut() {}
 
     // 自定义函数
 
     /**
      * 为 Button 写的函数
-     * @param event 
-     * @param level 
+     * @param event
+     * @param level
      */
     private onButtonRunScene(event: EventTouch, name: string) {
         runScene(name);
@@ -52,11 +47,10 @@ export class sceneController extends Component {
 
     /**
      * 为 Button 写的函数
-     * @param event 
-     * @param level 
+     * @param event
+     * @param level
      */
     private onButtonRunLevel(event: EventTouch, level?: string) {
         runLevel(level ? parseInt(level) : undefined);
     }
 }
-

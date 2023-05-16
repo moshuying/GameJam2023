@@ -1,7 +1,12 @@
+/**
+ * 光线发射器
+ * 控制光线向一个方向发射，并且检测碰撞
+ */
+
 import { _decorator, Collider2D, Component, Contact2DType, IPhysics2DContact, Node, Quat, UITransform, Vec3 } from 'cc';
 
-import { bucket } from '../bucket/bucket';
-import { point } from '../point/point';
+import { bucket } from './bucket';
+import { point } from './point';
 
 const { ccclass, property } = _decorator;
 

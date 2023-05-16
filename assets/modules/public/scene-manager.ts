@@ -16,7 +16,7 @@ let currentScene: Node | null = null;
 
 /**
  * 运行下一个关卡
- * @param level 
+ * @param level
  */
 export async function runLevel(level?: number) {
     if (!sceneManagerSingleton) {
@@ -61,7 +61,7 @@ export async function runLevel(level?: number) {
 
 /**
  * 运行除关卡外的场景
- * @param name 
+ * @param name
  */
 export async function runScene(name: string) {
     if (!sceneManagerSingleton) {
@@ -79,7 +79,6 @@ export async function runScene(name: string) {
     if (sceneManagerSingleton.persistentRoot.active === false) {
         sceneManagerSingleton.persistentRoot.active = true;
     }
-    
 
     // 遍历非关卡节点，将不需要的节点记录到数组，后续将移出节点树
     let node: Node | null = null;
@@ -102,7 +101,7 @@ export async function runScene(name: string) {
     // 移出不需要常驻的场景
     removeNodeList.forEach((child) => {
         sceneManagerSingleton.persistentRoot.removeChild(child);
-    })
+    });
 
     if (!node) {
         const prefab = sceneManagerSingleton.sceneMap.get(name);
@@ -123,7 +122,6 @@ export async function runScene(name: string) {
 
 @ccclass('sceneManager')
 export class sceneManager extends Component {
-
     @property({
         type: [Prefab],
         tooltip: '静态场景的 Prefab，这些场景可以选择是否常驻，是否销毁等功能',

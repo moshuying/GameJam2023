@@ -1,6 +1,7 @@
 /**
  * 控制点
  * 包含方向、圆大小、位置
+ * 光线碰撞后，收集能量
  */
 
 import { _decorator, ccenum, Component, UITransform, Vec2, Vec3, Size, EventTouch, NodeEventType } from 'cc';
